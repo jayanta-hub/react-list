@@ -1,0 +1,25 @@
+.customList {
+  width: 100%;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+  max-height: 80vh;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+  min-width: 100%;
+  flex-wrap: wrap;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2px;
+  border-radius: 10px;
+  flex-wrap: wrap;
+  background-color: #ebf5fb;
+  /* background-color: rgb(236, 242, 223); */
+}
