@@ -67,13 +67,12 @@ const TaskList = () => {
    */
   const addTask = useCallback(
     (text) => {
-      console.log("uuid", uuid());
-      // if (taskInput !== "")
-      //   setTasks((prev) => [{ text, isCompleted: false }, ...prev]);
-      // setTaskInput("");
-      // if (currentPage > 1) {
-      //   setCurrentPage(1);
-      // }
+      if (taskInput !== "")
+        setTasks((prev) => [{ id: uuid(), text, isCompleted: false }, ...prev]);
+      setTaskInput("");
+      if (currentPage > 1) {
+        setCurrentPage(1);
+      }
     },
     [taskInput, currentPage]
   );
@@ -111,29 +110,6 @@ const TaskList = () => {
     [tasks]
   );
 
-  /**
-   * The `paginationConfig` constant is an object that contains configuration for the pagination
-   * functionality in the TaskList component. Here's a breakdown of each property in the
-   * `paginationConfig` object:
-   *
-   * - `handlePrevious`: A function that is called when the "Previous" button is clicked
-   * in the pagination controls. It decrements the `currentPage` state variable if
-   * the current page is greater than 1.
-   *
-   * - `handleNext`: A function that is called when the "Next" button is clicked in the
-   * pagination controls. It increments the `currentPage` state variable if the
-   * current page is less than the total number of pages.
-   *
-   * - `handlePageChange`: A function that is called when a page number button is clicked
-   * in the pagination controls. It sets the `currentPage` state variable to the
-   * clicked page number.
-   *
-   * - `currentPage`: The current page number.
-   *
-   * - `totalPages`: The total number of pages based on the number of tasks and the
-   * page size (10 tasks per page).
-   */
-
   const paginationConfig = {
     onPreviousClick: handlePrevious,
     onNextClick: handleNext,
@@ -143,26 +119,11 @@ const TaskList = () => {
     maxPageNumbersToShow,
   };
 
-  /**
-   *The `customListConfig` constant is an object that contains configuration for the `CustomList`
-   * component. Here's a breakdown of each property in the `customListConfig` object:
-   *
-   * - `onClick`: A function that is called when a task is clicked. It takes the index of
-   * the clicked task as an argument and deletes the task from the `tasks` state variable.
-   *
-   * - `toggleCompleted`: A function that is called when a task is clicked. It takes the index
-   * of the clicked task as an argument and toggles the `isCompleted` property of the task in
-   * the `tasks` state variable.
-   *
-   * - `currentItems`: An array of tasks that are displayed on the current page.
-   */
-
   const customListConfig = {
     onDeleteClick: deleteTask,
     onCheckClick: toggleCompleted,
     currentItems,
   };
-  console.log("TaskList");
   useEffect(() => {
     if (currentItems?.length === 0) handlePrevious();
   }, [currentItems]);
