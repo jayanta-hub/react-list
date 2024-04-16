@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import "./customList.css";
 import { Box, CustomButton } from "../../index.jsx";
 const CustomList = ({
@@ -6,6 +6,7 @@ const CustomList = ({
   onClick = () => {},
   toggleCompleted = () => {},
 }) => {
+  console.log("CustomList", currentItems);
   return (
     <Box className="flex customList">
       <ul>
@@ -43,11 +44,11 @@ const CustomList = ({
                   marginRight: "10px",
                 }}
               >
-                <h5 style={{ margin: 15 }}>{task.text}</h5>
+                <h5 style={{ margin: 15 }}>{task?.text}</h5>
               </Box>
             </Box>
             <Box
-            className="flex"
+              className="flex"
               style={{
                 width: "10%",
                 flexWrap: "wrap",
@@ -66,4 +67,4 @@ const CustomList = ({
   );
 };
 
-export default CustomList;
+export default memo(CustomList);

@@ -1,16 +1,59 @@
-import React from "react";
+import React, { memo } from "react";
 import "./pagination.css";
 import { Box, CustomButton } from "../../index.jsx";
 const Pagination = ({
-  handlePrevious,
-  handleNext,
-  handlePageChange,
+  onPreviousClick,
+  onNextClick,
+  onPageChange,
   currentPage,
   totalPages,
+  maxPageNumbersToShow = 5,
 }) => {
   const pageNumbers = [];
-  for (let i = 1; i <= totalPages; i++) {
-    pageNumbers.push(i);
+
+  /*
+   * This is calculating the starting page number for the pagination component based on the current
+   * page, total number of pages, and the maximum number of page numbers to show.
+   */
+  const startPage = Math.max(
+    Math.min(
+      currentPage - Math.floor(maxPageNumbersToShow / 2),
+      totalPages - maxPageNumbersToShow + 1
+    ),
+    1
+  );
+
+  /*
+   * This is calculating the end page number for the pagination component.
+   */
+  const endPage = Math.min(startPage + maxPageNumbersToShow - 1, totalPages);
+
+  /**
+   * The `for` loop in the code snippet is iterating over a range of page numbers starting from
+   * `startPage` to `endPage`. For each page number within this range, a `CustomButton` component is
+   * created and added to the `pageNumbers` array.
+   */
+
+  for (let i = startPage; i <= endPage; i++) {
+    pageNumbers.push(
+      <CustomButton
+        key={i}
+        title={i}
+        className={`button ${currentPage === i ? "active" : ""}`}
+        onClick={() => onPageChange(i)}
+        style={{ margin: "0 5px" }}
+      />
+    );
+  }
+
+  if (totalPages > maxPageNumbersToShow + 2) {
+    // Add ellipsis for hidden pages in the middle
+    if (startPage > 1) {
+      pageNumbers.unshift(<span key="ellipsis-before">...</span>);
+    }
+    if (endPage < totalPages - 1) {
+      pageNumbers.push(<span key="ellipsis-after">...</span>);
+    }
   }
 
   /**
@@ -22,28 +65,21 @@ const Pagination = ({
     <Box className="paginationContainer">
       <CustomButton
         title="Previous"
-        onClick={handlePrevious}
+        onClick={onPreviousClick}
         disabled={currentPage === 1}
+        style={{ marginRight: "5px" }}
       />
-      {pageNumbers?.map((pageNumber) => (
-        <CustomButton
-          key={pageNumber}
-          title={pageNumber}
-          className={`button ${currentPage === pageNumber ? "active" : ""}`}
-          onClick={() => handlePageChange(pageNumber)}
-          style={{ margin: "0 5px" }}
-        />
-      ))}
+      {pageNumbers}
       <CustomButton
         title="Next"
-        onClick={handleNext}
+        onClick={onNextClick}
         disabled={currentPage === totalPages || totalPages === 0}
         style={{ marginLeft: "5px" }}
       />
     </Box>
   );
-
+  console.log("Pagination", currentPage, totalPages, maxPageNumbersToShow);
   return <>{renderPaginationControls()}</>;
 };
 
-export default Pagination;
+export default memo(Pagination);
