@@ -38,11 +38,15 @@ const Pagination = ({
       <CustomButton
         key={i}
         title={i}
-        className={`rounded-md py-1 px-2 text-white my-1 mx-1 min-w-6 focus:bg-transparent focus:border focus:border-blue-400 focus:text-blue-500 text-center ${
-          currentPage === i
-            ? "bg-transparent border border-blue-400 text-blue-500"
-            : "bg-blue-500"
-        }`}
+        className={`rounded-md py-1 px-2  my-1 mx-1 min-w-6 text-center 
+        focus:bg-transparent 
+        focus:border
+         focus:border-blue-400 
+         focus:text-blue-500  ${
+           currentPage === i
+             ? "bg-transparent border border-blue-400 text-blue-500 "
+             : "bg-blue-500 text-white"
+         }`}
         onClick={() => onPageChange(i)}
       />
     );
