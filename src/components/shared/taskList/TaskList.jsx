@@ -128,9 +128,9 @@ const TaskList = () => {
     if (currentItems?.length === 0) handlePrevious();
   }, [currentItems]);
   return (
-    <Box className="max-w-md mx-auto bg-white p-4 shadow-md overflow-hidden md:max-w-2xl rounded-md">
-      <h1 className="font-bold text-justify my-2 text-lg">Task List</h1>
-      <Box className="flex justify-start items-center">
+    <Box className="task-list-container">
+      <h1 className="header-text">Task List</h1>
+      <Box className="task-list-wrapper">
         <input
           type="text"
           placeholder="Add a task"
@@ -138,7 +138,7 @@ const TaskList = () => {
           onChange={(e) => {
             setTaskInput(e.target.value);
           }}
-          className="border border-gray-300 rounded-md mr-2 p-2"
+          className="input-field"
         />
 
         <CustomButton

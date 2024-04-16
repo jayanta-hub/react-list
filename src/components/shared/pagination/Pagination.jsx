@@ -90,7 +90,6 @@ const Pagination = ({
       />
     </Box>
   );
-  console.log("Pagination", currentPage, totalPages, maxPageNumbersToShow);
   return <>{renderPaginationControls()}</>;
 };
 
