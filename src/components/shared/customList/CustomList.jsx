@@ -1,5 +1,4 @@
 import React, { memo } from "react";
-import "./customList.css";
 import { Box, CustomButton } from "../../index.jsx";
 const CustomList = ({
   currentItems = [],
@@ -8,56 +7,29 @@ const CustomList = ({
 }) => {
   console.log("CustomList", currentItems);
   return (
-    <Box className="flex customList">
-      <ul>
+    <Box className="max-w-md mx-auto overflow-hidden md:max-w-2xl py-3">
+      <ul className="flex flex-col gap-2">
         {currentItems?.map((task, index) => (
-          <li key={index}>
-            <Box
-              style={{
-                width: "90%",
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <Box
-                className="flex"
-                style={{
-                  flexWrap: "wrap",
-                  padding: "5px",
-                }}
-              >
-                <input
-                  type="checkbox"
-                  checked={task?.isCompleted}
-                  onChange={() => toggleCompleted(index)}
-                  style={{
-                    height: "20px",
-                    width: "20px",
-                  }}
-                />
-              </Box>
-              <Box
-                className="flex"
-                style={{
-                  flexWrap: "wrap",
-                  marginLeft: "10px",
-                  marginRight: "10px",
-                }}
-              >
-                <h5 style={{ margin: 15 }}>{task?.text}</h5>
-              </Box>
+          <li
+            key={index}
+            className="max-w-md md:max-w-2xl mx-auto bg-blue-200 rounded-xl shadow-md overflow-hidden flex justify-between items-center px-2 py-2 w-full"
+          >
+            <Box className="flex justify-center items-center max-w-50 flex-wrap">
+              <input
+                type="checkbox"
+                checked={task?.isCompleted}
+                onChange={() => toggleCompleted(index)}
+                className="w-5 h-5"
+              />
             </Box>
-            <Box
-              className="flex"
-              style={{
-                width: "10%",
-                flexWrap: "wrap",
-              }}
-            >
+            <Box className="flex justify-stretch w-full flex-wrap px-2 text-wrap">
+              <h5 className="font-sans text-justify ">{task?.text}</h5>
+            </Box>
+            <Box className="flex justify-center items-center max-w-50 flex-wrap min-h-full">
               <CustomButton
                 title="Delete"
                 onClick={() => onClick(index)}
-                bg="red"
+                className="rounded-md bg-red-500 py-1 px-1 text-white font-sans"
               />
             </Box>
           </li>

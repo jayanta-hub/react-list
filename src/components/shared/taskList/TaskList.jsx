@@ -162,15 +162,9 @@ const TaskList = () => {
     if (currentItems?.length === 0) handlePrevious();
   }, [currentItems]);
   return (
-    <Box className="task-list">
-      <h1>Task List</h1>
-      <Box
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
+    <Box className="max-w-md mx-auto bg-white p-4 shadow-md overflow-hidden md:max-w-2xl rounded-md">
+      <h1 className="font-bold text-justify my-2 text-lg">Task List</h1>
+      <Box className="flex justify-start items-center">
         <input
           type="text"
           placeholder="Add a task"
@@ -178,15 +172,21 @@ const TaskList = () => {
           onChange={(e) => {
             setTaskInput(e.target.value);
           }}
+          className="border border-gray-300 rounded-md mr-2 p-2"
         />
 
         <CustomButton
-          title="Add New Task"
+          title="Add"
           onClick={() => addTask(taskInput)}
           disabled={taskInput === ""}
+          className={`${
+            taskInput === ""
+              ? "bg-gray-300 cursor-not-allowed hover:bg-gray-300"
+              : "bg-blue-500"
+          } rounded py-1 px-1 text-white my-1 mx-1 min-w-6 hover:bg-blue-400 w-20 h-10`}
         />
       </Box>
-      <CustomButton title="Add New" onClick={() => setRe((prev) => prev + 1)} />
+      {/* <CustomButton title="Add New" onClick={() => setRe((prev) => prev + 1)} /> */}
       <CustomList {...customListConfig} />
       <Pagination {...paginationConfig} />
     </Box>

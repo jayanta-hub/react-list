@@ -1,11 +1,7 @@
 import React from "react";
 
-const Box = ({ children, className, style, bg }) => {
-  return (
-    <div className={className} style={{ ...style, bg }}>
-      {children}
-    </div>
-  );
+const Box = ({ children, className }) => {
+  return <div className={className}>{children}</div>;
 };
 
 export default Box;
