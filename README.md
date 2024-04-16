@@ -48,8 +48,6 @@ return (
 | onCheckClick  | `Yes`    | `Function` | `()=>{}` | The method to call when checkbox is clicked.      |
 | onDeleteClick | `Yes`    | `Function` | `()=>{}` | The method to call when delete button is clicked. |
 
-|
-
 # Pagination
 
 **Pagination** is a tiny Javascript library which provides an elegant UI for the end user to use customize pagination. It also features a carefully crafted flow to handle edge cases for volatile user gestures. We provide default UI, but you can always customize the appearance as you like.
