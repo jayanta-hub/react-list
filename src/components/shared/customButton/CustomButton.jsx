@@ -9,7 +9,11 @@ const CustomButton = ({
 }) => {
   return (
     <button
-      className={className ? className : `button ${disabled ? "disabled" : ""}`}
+      className={
+        className !== ""
+          ? className
+          : "bg-blue-500 rounded py-1 px-1 text-white min-w-20 hover:bg-blue-400 self-auto"
+      }
       style={{ ...style, backgroundColor: bg }}
       onClick={onClick}
       type="button"

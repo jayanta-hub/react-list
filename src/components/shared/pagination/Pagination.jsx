@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import "./pagination.css";
+// import "./pagination.css";
 import { Box, CustomButton } from "../../index.jsx";
 const Pagination = ({
   onPreviousClick,
@@ -39,9 +39,12 @@ const Pagination = ({
       <CustomButton
         key={i}
         title={i}
-        className={`button ${currentPage === i ? "active" : ""}`}
+        className={`rounded py-1 px-2 text-white my-1 mx-1 min-w-6 focus:bg-transparent focus:border focus:border-blue-400 focus:text-blue-500 text-center ${
+          currentPage === i
+            ? "bg-transparent border border-blue-400 text-blue-500"
+            : "bg-blue-500"
+        }`}
         onClick={() => onPageChange(i)}
-        style={{ margin: "0 5px" }}
       />
     );
   }
@@ -51,7 +54,7 @@ const Pagination = ({
     if (startPage > 1) {
       pageNumbers.unshift(<span key="ellipsis-before">...</span>);
     }
-    if (endPage < totalPages - 1) {
+    if (endPage < totalPages) {
       pageNumbers.push(<span key="ellipsis-after">...</span>);
     }
   }
@@ -62,26 +65,25 @@ const Pagination = ({
    * @return {JSX.Element} The pagination controls JSX element.
    */
   const renderPaginationControls = () => (
-    <Box
-      className="paginationContainer"
-      style={{
-        display: "flex",
-        justifyContent: "flex-end",
-        alignItems: "center",
-      }}
-    >
+    <Box className="flex justify-end items-center w-full">
       <CustomButton
         title="Previous"
         onClick={onPreviousClick}
-        disabled={currentPage === 1}
-        style={{ marginRight: "5px" }}
+        className={`${
+          currentPage === 1
+            ? "bg-gray-300 cursor-not-allowed hover:bg-gray-300"
+            : "bg-blue-500"
+        } rounded py-1 px-1 text-white my-1 mx-1 min-w-6 hover:bg-blue-400`}
       />
       {pageNumbers}
       <CustomButton
         title="Next"
         onClick={onNextClick}
-        disabled={currentPage === totalPages || totalPages === 0}
-        style={{ marginLeft: "5px" }}
+        className={`${
+          currentPage === totalPages || totalPages === 0
+            ? "bg-gray-300 cursor-not-allowed hover:bg-gray-300"
+            : "bg-blue-500"
+        } rounded py-1 px-1 text-white my-1 mx-1 min-w-6 hover:bg-blue-400`}
       />
     </Box>
   );
