@@ -6,6 +6,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `npm install`
+
 ### `npm start`
 
 Runs the app in the development mode.\
@@ -14,57 +16,51 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
+# Pagination
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Pagination** is a tiny Javascript library which provides an elegant UI for the end user to use customize pagination. It also features a carefully crafted flow to handle edge cases for volatile user gestures. We provide default UI, but you can always customize the appearance as you like.
 
-### `npm run build`
+## Basic Usage
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+import { Pagination } from "../../index.jsx";
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+...
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+ const paginationConfig = {
+    onPreviousClick: ()=>{},
+    onNextClick: ()=>{},
+    onPageChange: ()=>{},
+    currentPage=1,
+    pageCount=10,
+    maxPageNumbersToShow=5,
+  };
+...
+return (
+    <>
+      <Pagination {...paginationConfig} />
+    </>
+      )
+```
 
-### `npm run eject`
+## Parameters
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+| Parameter            | Required | Type       | Default  | Description                                                                                 |
+| -------------------- | -------- | ---------- | -------- | ------------------------------------------------------------------------------------------- |
+| pageCount            | `Yes`    | `Number`   | `0`      | The total number of pages.                                                                  |
+| currentPage          | `Yes`    | `Number`   | `0`      | This callback is called when user taps outside of a Modal.                                  |
+| maxPageNumbersToShow | `Yes`    | `Number`   | `5`      | The range of pages displayed.                                                               |
+| onPreviousClick      | `Yes`    | `Function` | `()=>{}` | The method to call when previous button is clicked.                                         |
+| onNextClick          | `Yes`    | `Function` | `()=>{}` | The method to call when next button is clicked.                                             |
+| onPageChange         | `Yes`    | `Function` | `()=>{}` | The method to call when a page is clicked. Exposes the current page object as an argument.. |
+|                      |
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Author
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![jayanta7381](https://www.npmjs.com/npm-avatar/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdmF0YXJVUkwiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci81ZWZhZGY0MjdjNzliM2YxZDY0ODcxNzI0NjI2NWQzNz9zaXplPTEwMCZkZWZhdWx0PXJldHJvIn0.Ujb96nLBkk2Z0K5NilEVjWj-0Kpa6NTFeIV8c5Ip-mQ)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+[Jayanta Garu](https://github.com/jayanta-hub)
 
-## Learn More
+## License
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+MIT
