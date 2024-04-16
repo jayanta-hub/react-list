@@ -28,7 +28,7 @@ const CustomList = ({
               >
                 <input
                   type="checkbox"
-                  checked={task?.completed}
+                  checked={task?.isCompleted}
                   onChange={() => toggleCompleted(index)}
                   style={{
                     height: "20px",
