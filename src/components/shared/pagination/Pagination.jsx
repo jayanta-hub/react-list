@@ -5,8 +5,8 @@ const Pagination = ({
   onPreviousClick,
   onNextClick,
   onPageChange,
-  currentPage,
-  totalPages,
+  currentPage=0,
+  totalPages=0,
   maxPageNumbersToShow = 5,
 }) => {
   const pageNumbers = [];
