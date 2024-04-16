@@ -3,8 +3,8 @@ import { Box, CustomButton } from "../../index.jsx";
 import { MdDeleteForever } from "react-icons/md";
 const CustomList = ({
   currentItems = [],
-  onClick = () => {},
-  toggleCompleted = () => {},
+  onDeleteClick = () => {},
+  onCheckClick = () => {},
 }) => {
   console.log("CustomList", currentItems);
   return (
@@ -19,7 +19,7 @@ const CustomList = ({
               <input
                 type="checkbox"
                 checked={task?.isCompleted}
-                onChange={() => toggleCompleted(task?.id)}
+                onChange={() => onCheckClick(task?.id)}
                 className="w-5 h-5"
               />
             </Box>
@@ -28,7 +28,7 @@ const CustomList = ({
             </Box>
             <Box className="flex justify-center items-center max-w-50 flex-wrap min-h-full">
               <CustomButton
-                onClick={() => onClick(task?.id)}
+                onClick={() => onDeleteClick(task?.id)}
                 className="rounded-full bg-red-500 py-1 px-1 text-white font-sans"
                 icon={<MdDeleteForever size={20} />}
               />
