@@ -1,5 +1,4 @@
 import React, { memo } from "react";
-// import "./pagination.css";
 import { Box, CustomButton } from "../../index.jsx";
 const Pagination = ({
   onPreviousClick,
