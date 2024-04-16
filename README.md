@@ -79,14 +79,14 @@ return (
 
 ## Parameters
 
-| Parameter            | Required | Type       | Default  | Description                                                                                 |
-| -------------------- | -------- | ---------- | -------- | ------------------------------------------------------------------------------------------- |
-| pageCount            | `Yes`    | `Number`   | `0`      | The total number of pages.                                                                  |
-| currentPage          | `Yes`    | `Number`   | `0`      | This callback is called when user taps outside of a Modal.                                  |
-| maxPageNumbersToShow | `Yes`    | `Number`   | `5`      | The range of pages displayed.                                                               |
-| onPreviousClick      | `Yes`    | `Function` | `()=>{}` | The method to call when previous button is clicked.                                         |
-| onNextClick          | `Yes`    | `Function` | `()=>{}` | The method to call when next button is clicked.                                             |
-| onPageChange         | `Yes`    | `Function` | `()=>{}` | The method to call when a page is clicked. Exposes the current page object as an argument.. |
+| Parameter            | Required | Type       | Default  | Description                                                |
+| -------------------- | -------- | ---------- | -------- | ---------------------------------------------------------- |
+| pageCount            | `Yes`    | `Number`   | `0`      | The total number of pages.                                 |
+| currentPage          | `Yes`    | `Number`   | `0`      | This callback is called when user taps outside of a Modal. |
+| maxPageNumbersToShow | `Yes`    | `Number`   | `5`      | The range of pages displayed.                              |
+| onPreviousClick      | `Yes`    | `Function` | `()=>{}` | The method to call when previous button is clicked.        |
+| onNextClick          | `Yes`    | `Function` | `()=>{}` | The method to call when next button is clicked.            |
+| onPageChange         | `Yes`    | `Function` | `()=>{}` | The method to call when a page is clicked.                 |
 |                      |
 
 ## Author
