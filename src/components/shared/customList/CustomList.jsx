@@ -29,7 +29,7 @@ const CustomList = ({
             <Box className="flex justify-center items-center max-w-50 flex-wrap min-h-full">
               <CustomButton
                 onClick={() => onClick(task?.id)}
-                className="rounded-md bg-red-500 py-1 px-2 text-white font-sans"
+                className="rounded-full bg-red-500 py-1 px-1 text-white font-sans"
                 icon={<MdDeleteForever size={20} />}
               />
             </Box>
