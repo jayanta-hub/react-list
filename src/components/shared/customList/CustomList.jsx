@@ -1,5 +1,6 @@
 import React, { memo } from "react";
 import { Box, CustomButton } from "../../index.jsx";
+import { MdDeleteForever } from "react-icons/md";
 const CustomList = ({
   currentItems = [],
   onClick = () => {},
@@ -12,13 +13,13 @@ const CustomList = ({
         {currentItems?.map((task, index) => (
           <li
             key={index}
-            className="max-w-md md:max-w-2xl mx-auto bg-blue-200 rounded-xl shadow-md overflow-hidden flex justify-between items-center px-2 py-2 w-full"
+            className="max-w-md md:max-w-2xl mx-auto bg-gradient-to-br from-blue-200 to-blue-400 rounded-xl shadow-md overflow-hidden flex justify-between items-center px-2 py-2 w-full"
           >
             <Box className="flex justify-center items-center max-w-50 flex-wrap">
               <input
                 type="checkbox"
                 checked={task?.isCompleted}
-                onChange={() => toggleCompleted(index)}
+                onChange={() => toggleCompleted(task?.id)}
                 className="w-5 h-5"
               />
             </Box>
@@ -27,9 +28,9 @@ const CustomList = ({
             </Box>
             <Box className="flex justify-center items-center max-w-50 flex-wrap min-h-full">
               <CustomButton
-                title="Delete"
-                onClick={() => onClick(index)}
-                className="rounded-md bg-red-500 py-1 px-1 text-white font-sans"
+                onClick={() => onClick(task?.id)}
+                className="rounded-md bg-red-500 py-1 px-2 text-white font-sans"
+                icon={<MdDeleteForever size={20} />}
               />
             </Box>
           </li>

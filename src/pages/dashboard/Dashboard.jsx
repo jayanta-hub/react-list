@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, CustomButton, TaskList } from "../../components/index.jsx";
+import { Box, TaskList } from "../../components/index.jsx";
 
 const Dashboard = () => {
   return (

@@ -39,7 +39,7 @@ const Pagination = ({
       <CustomButton
         key={i}
         title={i}
-        className={`rounded py-1 px-2 text-white my-1 mx-1 min-w-6 focus:bg-transparent focus:border focus:border-blue-400 focus:text-blue-500 text-center ${
+        className={`rounded-md py-1 px-2 text-white my-1 mx-1 min-w-6 focus:bg-transparent focus:border focus:border-blue-400 focus:text-blue-500 text-center ${
           currentPage === i
             ? "bg-transparent border border-blue-400 text-blue-500"
             : "bg-blue-500"
@@ -73,7 +73,7 @@ const Pagination = ({
           currentPage === 1
             ? "bg-gray-300 cursor-not-allowed hover:bg-gray-300"
             : "bg-blue-500"
-        } rounded py-1 px-1 text-white my-1 mx-1 min-w-6 hover:bg-blue-400`}
+        } rounded-md py-1 px-2 text-white my-1 mx-1 min-w-6 hover:bg-blue-400`}
       />
       {pageNumbers}
       <CustomButton
@@ -83,7 +83,7 @@ const Pagination = ({
           currentPage === totalPages || totalPages === 0
             ? "bg-gray-300 cursor-not-allowed hover:bg-gray-300"
             : "bg-blue-500"
-        } rounded py-1 px-1 text-white my-1 mx-1 min-w-6 hover:bg-blue-400`}
+        } rounded-md py-1 px-2 text-white my-1 mx-1 min-w-6 hover:bg-blue-400`}
       />
     </Box>
   );
