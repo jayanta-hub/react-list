@@ -2,10 +2,10 @@ import React from "react";
 const CustomButton = ({
   onClick = () => {},
   title = "",
-  disabled = false,
   className = "",
   style = {},
   bg = "",
+  icon = null,
 }) => {
   return (
     <button
@@ -18,7 +18,7 @@ const CustomButton = ({
       onClick={onClick}
       type="button"
     >
-      {title}
+      {icon ?? title}
     </button>
   );
 };

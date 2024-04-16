@@ -1,16 +1,17 @@
 import { useCallback, useEffect, useState } from "react";
 import { Box, CustomButton, CustomList, Pagination } from "../../index.jsx";
+import { uuid } from "../../../utils/helpers/index.jsx";
 
 const TaskList = () => {
   const [tasks, setTasks] = useState(
     Array.from({ length: 100 }, (_, i) => ({
+      id: uuid(),
       text: `Item ${i + 1}`,
       isCompleted: false,
     }))
   );
   const [taskInput, setTaskInput] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [re, setRe] = useState(0);
 
   const maxPageNumbersToShow = 5;
 
@@ -23,8 +24,6 @@ const TaskList = () => {
   const endIndex = Math.min(startIndex + maxItemsToShow, tasks?.length);
 
   const currentItems = tasks?.slice(startIndex, endIndex);
-
-  const newTasks = [...tasks];
 
   /**
    * Decrements the current page by 1 if the current page is greater than 1.
@@ -68,12 +67,13 @@ const TaskList = () => {
    */
   const addTask = useCallback(
     (text) => {
-      if (taskInput !== "")
-        setTasks((prev) => [{ text, isCompleted: false }, ...prev]);
-      setTaskInput("");
-      if (currentPage > 1) {
-        setCurrentPage(1);
-      }
+      console.log("uuid", uuid());
+      // if (taskInput !== "")
+      //   setTasks((prev) => [{ text, isCompleted: false }, ...prev]);
+      // setTaskInput("");
+      // if (currentPage > 1) {
+      //   setCurrentPage(1);
+      // }
     },
     [taskInput, currentPage]
   );
@@ -85,8 +85,8 @@ const TaskList = () => {
    * @return {void}
    */
   const deleteTask = useCallback(
-    (index) => {
-      newTasks.splice(index, 1);
+    (id) => {
+      let newTasks = tasks?.filter((item) => item.id !== id);
       setTasks(newTasks);
     },
     [tasks]
@@ -99,8 +99,13 @@ const TaskList = () => {
    * @return {void}
    */
   const toggleCompleted = useCallback(
-    (index) => {
-      newTasks[index].isCompleted = !newTasks[index].isCompleted;
+    (id) => {
+      let newTasks = tasks?.map((item) => {
+        if (item.id === id) {
+          item.isCompleted = !item.isCompleted;
+        }
+        return item;
+      });
       setTasks(newTasks);
     },
     [tasks]
@@ -183,10 +188,9 @@ const TaskList = () => {
             taskInput === ""
               ? "bg-gray-300 cursor-not-allowed hover:bg-gray-300"
               : "bg-blue-500"
-          } rounded py-1 px-1 text-white my-1 mx-1 min-w-6 hover:bg-blue-400 w-20 h-10`}
+          } rounded-md py-1 px-2 text-white my-1 mx-1 min-w-6 hover:bg-blue-400 w-20 h-10`}
         />
       </Box>
-      {/* <CustomButton title="Add New" onClick={() => setRe((prev) => prev + 1)} /> */}
       <CustomList {...customListConfig} />
       <Pagination {...paginationConfig} />
     </Box>
