@@ -158,8 +158,8 @@ const TaskList = () => {
    */
 
   const customListConfig = {
-    onClick: deleteTask,
-    toggleCompleted: toggleCompleted,
+    onDeleteClick: deleteTask,
+    onCheckClick: toggleCompleted,
     currentItems,
   };
   console.log("TaskList");
