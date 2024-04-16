@@ -167,7 +167,7 @@ const TaskList = () => {
       <Box
         style={{
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "flex-start",
           alignItems: "center",
         }}
       >
@@ -181,9 +181,13 @@ const TaskList = () => {
         />
 
         <CustomButton
-          title="Add New Task"
+          title="Add"
           onClick={() => addTask(taskInput)}
           disabled={taskInput === ""}
+          style={{
+            height: "40px",
+            width: "80px",
+          }}
         />
       </Box>
       <CustomButton title="Add New" onClick={() => setRe((prev) => prev + 1)} />

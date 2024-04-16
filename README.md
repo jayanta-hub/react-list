@@ -16,6 +16,46 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
+# CustomList
+
+**CustomList** is a react component which provides an elegant UI for the end user to use list of items. It also features a carefully crafted flow to handle edge cases for volatile user gestures. We provide default UI, but you can always customize the appearance as you like.
+
+## Basic Usage
+
+```
+import { Pagination } from "../../index.jsx";
+
+...
+
+ const paginationConfig = {
+    onPreviousClick: ()=>{},
+    onNextClick: ()=>{},
+    onPageChange: ()=>{},
+    currentPage=1,
+    pageCount=10,
+    maxPageNumbersToShow=5,
+  };
+...
+return (
+    <>
+      <Pagination {...paginationConfig} />
+    </>
+      )
+```
+
+## Parameters
+
+| Parameter            | Required | Type       | Default  | Description                                                                                 |
+| -------------------- | -------- | ---------- | -------- | ------------------------------------------------------------------------------------------- |
+| pageCount            | `Yes`    | `Number`   | `0`      | The total number of pages.                                                                  |
+| currentPage          | `Yes`    | `Number`   | `0`      | This callback is called when user taps outside of a Modal.                                  |
+| maxPageNumbersToShow | `Yes`    | `Number`   | `5`      | The range of pages displayed.                                                               |
+| onPreviousClick      | `Yes`    | `Function` | `()=>{}` | The method to call when previous button is clicked.                                         |
+| onNextClick          | `Yes`    | `Function` | `()=>{}` | The method to call when next button is clicked.                                             |
+| onPageChange         | `Yes`    | `Function` | `()=>{}` | The method to call when a page is clicked. Exposes the current page object as an argument.. |
+
+|
+
 # Pagination
 
 **Pagination** is a tiny Javascript library which provides an elegant UI for the end user to use customize pagination. It also features a carefully crafted flow to handle edge cases for volatile user gestures. We provide default UI, but you can always customize the appearance as you like.

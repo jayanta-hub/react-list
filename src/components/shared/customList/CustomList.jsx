@@ -8,7 +8,7 @@ const CustomList = ({
 }) => {
   console.log("CustomList", currentItems);
   return (
-    <Box className="flex customList">
+    <Box className="flex wrap customList">
       <ul>
         {currentItems?.map((task, index) => (
           <li key={index}>
@@ -20,9 +20,8 @@ const CustomList = ({
               }}
             >
               <Box
-                className="flex"
+                className="flex wrap"
                 style={{
-                  flexWrap: "wrap",
                   padding: "5px",
                 }}
               >
@@ -37,9 +36,8 @@ const CustomList = ({
                 />
               </Box>
               <Box
-                className="flex"
+                className="flex wrap"
                 style={{
-                  flexWrap: "wrap",
                   marginLeft: "10px",
                   marginRight: "10px",
                 }}
@@ -48,16 +46,18 @@ const CustomList = ({
               </Box>
             </Box>
             <Box
-              className="flex"
+              className="flex wrap"
               style={{
                 width: "10%",
-                flexWrap: "wrap",
               }}
             >
               <CustomButton
                 title="Delete"
                 onClick={() => onClick(index)}
                 bg="red"
+                style={{
+                  width: "fit-content",
+                }}
               />
             </Box>
           </li>

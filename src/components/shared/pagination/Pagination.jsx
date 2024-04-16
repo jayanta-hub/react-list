@@ -5,8 +5,8 @@ const Pagination = ({
   onPreviousClick,
   onNextClick,
   onPageChange,
-  currentPage=0,
-  totalPages=0,
+  currentPage = 0,
+  totalPages = 0,
   maxPageNumbersToShow = 5,
 }) => {
   const pageNumbers = [];
@@ -62,7 +62,14 @@ const Pagination = ({
    * @return {JSX.Element} The pagination controls JSX element.
    */
   const renderPaginationControls = () => (
-    <Box className="paginationContainer">
+    <Box
+      className="paginationContainer"
+      style={{
+        display: "flex",
+        justifyContent: "flex-end",
+        alignItems: "center",
+      }}
+    >
       <CustomButton
         title="Previous"
         onClick={onPreviousClick}
