@@ -1,14 +1,95 @@
-import React, { memo } from "react";
-import { Box, CustomButton } from "../../index.jsx";
+import React, { useEffect, useState } from "react";
+import { Box, CustomButton, CustomList } from "../../index.jsx";
 import "./pagination.css";
-const Pagination = ({
-  onPreviousClick,
-  onNextClick,
-  onPageActive,
-  pageNumber = 1,
-  pageSize = 10,
-  pgBtnCount = 5,
-}) => {
+import { uuid } from "../../../utils/helpers/index.jsx";
+const Pagination = ({ pageNumber = 1, pageSize = 10, pgBtnCount = 5 }) => {
+  const [tasks, setTasks] = useState(
+    Array.from({ length: 100 }, (_, i) => ({
+      id: uuid(),
+      text: `Item ${i + 1}`,
+      isCompleted: false,
+    }))
+  );
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const maxItemsToShow = 10;
+
+  const totalPages = Math.ceil(tasks?.length / maxItemsToShow);
+
+  const startIndex = (currentPage - 1) * maxItemsToShow;
+
+  const endIndex = Math.min(startIndex + maxItemsToShow, tasks?.length);
+
+  const currentItems = tasks?.slice(startIndex, endIndex);
+
+  /**
+   * Decrements the current page by 1 if the current page is greater than 1.
+   *
+   * @return {void}
+   */
+  const handlePrevious = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  /**
+   * Increments the current page if it's not the last page.
+   *
+   * @return {void} No return value
+   */
+  const handleNext = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  /**
+   * A function that handles a change in the current page.
+   *
+   * @param {number} pageNumber - The new page number to set
+   * @return {void}
+   */
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  /**
+   * Deletes a task from the task list.
+   *
+   * @param {number} index - The index of the task to delete
+   * @return {void}
+   */
+  const deleteTask = (id) => {
+    let newTasks = tasks?.filter((item) => item.id !== id);
+    setTasks(newTasks);
+  };
+
+  /**
+   * A function that toggles the isCompleted status of a task at a specific index in the tasks array.
+   *
+   * @param {number} index - The index of the task to toggle
+   * @return {void}
+   */
+  const toggleCompleted = (id) => {
+    let newTasks = tasks?.map((item) => {
+      if (item.id === id) {
+        item.isCompleted = !item.isCompleted;
+      }
+      return item;
+    });
+    setTasks(newTasks);
+  };
+
+  const customListConfig = {
+    items: currentItems,
+    onDeleteClick: deleteTask,
+    onCheckClick: toggleCompleted,
+  };
+  useEffect(() => {
+    if (currentItems?.length === 0) handlePrevious();
+  }, [currentItems]);
+
   const pageNumbers = [];
 
   /*
@@ -42,7 +123,7 @@ const Pagination = ({
         className={`pg-btn ${
           pageNumber === i ? "pg-active-btn" : "pg-active-btn-color"
         }`}
-        onClick={() => onPageActive(i)}
+        onClick={() => handlePageChange(i)}
       />
     );
   }
@@ -73,7 +154,7 @@ const Pagination = ({
     <Box className="flex justify-end items-center w-full">
       <CustomButton
         title="Previous"
-        onClick={onPreviousClick}
+        onClick={handlePageChange}
         className={`next-prev-btn ${
           pageNumber === 1 ? "disabled-btn" : "pg-active-btn-color hover-btn"
         }`}
@@ -81,7 +162,7 @@ const Pagination = ({
       {pageNumbers}
       <CustomButton
         title="Next"
-        onClick={onNextClick}
+        onClick={handleNext}
         className={`next-prev-btn ${
           pageNumber === pageSize || pageSize === 0
             ? "disabled-btn"
@@ -90,7 +171,12 @@ const Pagination = ({
       />
     </Box>
   );
-  return <>{renderPaginationControls()}</>;
+  return (
+    <>
+      <CustomList {...customListConfig} />
+      {renderPaginationControls()}
+    </>
+  );
 };
 
-export default memo(Pagination);
+export default Pagination;

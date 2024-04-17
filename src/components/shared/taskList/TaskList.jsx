@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useState } from "react";
-import { Box, CustomButton, CustomList, Pagination } from "../../index.jsx";
-import { uuid } from "../../../utils/helpers/index.jsx";
+import { useCallback, useState } from "react";
+import { Box, CustomButton, CustomList } from "../../index.jsx";
 import "./taskList.css";
+import { uuid } from "../../../utils/helpers/index.jsx";
 const TaskList = () => {
   const [tasks, setTasks] = useState(
     Array.from({ length: 100 }, (_, i) => ({
@@ -11,71 +11,17 @@ const TaskList = () => {
     }))
   );
   const [taskInput, setTaskInput] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const pgBtnCount = 6;
-
-  const maxItemsToShow = 10;
-
-  const totalPages = Math.ceil(tasks?.length / maxItemsToShow);
-
-  const startIndex = (currentPage - 1) * maxItemsToShow;
-
-  const endIndex = Math.min(startIndex + maxItemsToShow, tasks?.length);
-
-  const currentItems = tasks?.slice(startIndex, endIndex);
-
-  /**
-   * Decrements the current page by 1 if the current page is greater than 1.
-   *
-   * @return {void}
-   */
-  const handlePrevious = useCallback(() => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  }, [currentPage]);
-
-  /**
-   * Increments the current page if it's not the last page.
-   *
-   * @return {void} No return value
-   */
-  const handleNext = useCallback(() => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
-  }, [currentPage]);
-
-  /**
-   * A function that handles a change in the current page.
-   *
-   * @param {number} pageNumber - The new page number to set
-   * @return {void}
-   */
-  const handlePageChange = useCallback(
-    (pageNumber) => {
-      setCurrentPage(pageNumber);
-    },
-    [currentPage]
-  );
 
   /**
    * Adds a new task to the task list.
    *
    * @param {string} text - The text of the task to add
    */
-  const addTask = useCallback(
-    (text) => {
-      if (taskInput !== "")
-        setTasks((prev) => [{ id: uuid(), text, isCompleted: false }, ...prev]);
-      setTaskInput("");
-      if (currentPage > 1) {
-        setCurrentPage(1);
-      }
-    },
-    [taskInput, currentPage]
-  );
+  const addTask = (text) => {
+    if (taskInput !== "")
+      setTasks((prev) => [{ id: uuid(), text, isCompleted: false }, ...prev]);
+    setTaskInput("");
+  };
 
   /**
    * Deletes a task from the task list.
@@ -110,25 +56,14 @@ const TaskList = () => {
     [tasks]
   );
 
-  const paginationConfig = {
-    pageNumber: currentPage,
-    pageSize: totalPages,
-    pgBtnCount,
-    onPreviousClick: handlePrevious,
-    onNextClick: handleNext,
-    onPageActive: handlePageChange,
-  };
-
   const customListConfig = {
-    items: currentItems,
+    items: tasks,
     onDeleteClick: deleteTask,
     onCheckClick: toggleCompleted,
   };
-  useEffect(() => {
-    if (currentItems?.length === 0) handlePrevious();
-  }, [currentItems]);
+
   return (
-    <Box className="task-list-container">
+    <Box className="task-list-container max-h-80 ">
       <h1 className="header-text">Task List</h1>
       <Box className="task-list-wrapper">
         <input
@@ -150,7 +85,6 @@ const TaskList = () => {
         />
       </Box>
       <CustomList {...customListConfig} />
-      <Pagination {...paginationConfig} />
     </Box>
   );
 };

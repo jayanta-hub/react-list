@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React from "react";
 import { Box, CustomButton } from "../../index.jsx";
 import "./customList.css";
 const CustomList = ({
@@ -7,7 +7,7 @@ const CustomList = ({
   onCheckClick = () => {},
 }) => {
   return (
-    <Box className="custom-list-container">
+    <Box className="custom-list-container bg-black max-h-dvh overscroll-y-auto ">
       <ul className="ul-wrapper">
         {items?.map((task, index) => (
           <li key={index} className="li-wrapper">
@@ -36,4 +36,4 @@ const CustomList = ({
   );
 };
 
-export default memo(CustomList);
+export default CustomList;

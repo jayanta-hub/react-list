@@ -1,10 +1,11 @@
 import React from "react";
-import { Box, TaskList } from "../../components/index.jsx";
+import { Box, Pagination, TaskList } from "../../components/index.jsx";
 
 const Dashboard = () => {
   return (
     <Box className="container items-center py-5">
       <TaskList />
+      {/* <Pagination /> */}
     </Box>
   );
 };
