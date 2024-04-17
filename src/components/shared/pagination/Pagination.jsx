@@ -23,11 +23,13 @@ const Pagination = ({
     ),
     1
   );
+  console.log("🚀 ~ startPage:", startPage);
 
   /*
    * This is calculating the end page number for the pagination component.
    */
   const endPage = Math.min(startPage + pgBtnCount - 1, pageSize);
+  console.log("🚀 ~ endPage:", endPage);
 
   /**
    * The `for` loop in the code snippet is iterating over a range of page numbers starting from
@@ -36,16 +38,18 @@ const Pagination = ({
    */
 
   for (let i = startPage; i <= endPage; i++) {
-    pageNumbers.push(
-      <CustomButton
-        key={i}
-        title={i}
-        className={`pg-btn ${
-          pageNumber === i ? "pg-active-btn" : "pg-active-btn-color"
-        }`}
-        onClick={() => onPageActive(i)}
-      />
-    );
+    if (i !== 1 && i !== pageSize) {
+      pageNumbers.push(
+        <CustomButton
+          key={i}
+          title={i}
+          className={`pg-btn ${
+            pageNumber === i ? "pg-active-btn" : "pg-active-btn-color"
+          }`}
+          onClick={() => onPageActive(i)}
+        />
+      );
+    }
   }
 
   if (pageSize > pgBtnCount + 2) {
@@ -79,7 +83,26 @@ const Pagination = ({
           pageNumber === 1 ? "disabled-btn" : "pg-active-btn-color hover-btn"
         }`}
       />
+      {endPage > 0 && (
+        <CustomButton
+          title={1}
+          className={`pg-btn ${
+            pageNumber === 1 ? "pg-active-btn" : "pg-active-btn-color"
+          }`}
+          onClick={() => onPageActive(1)}
+        />
+      )}
       {pageNumbers}
+      {endPage !== 1 && endPage > 0 && (
+        <CustomButton
+          title={pageSize}
+          className={`pg-btn ${
+            pageNumber === pageSize ? "pg-active-btn" : "pg-active-btn-color"
+          }`}
+          onClick={() => onPageActive(pageSize)}
+        />
+      )}
+
       <CustomButton
         title={CONTAINS.NEXT}
         onClick={onNextClick}
@@ -91,6 +114,8 @@ const Pagination = ({
       />
     </Box>
   );
+  console.log("🚀 ~ pageNumbers:", pageNumbers);
+
   return <>{renderPaginationControls()}</>;
 };
 

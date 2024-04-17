@@ -14,7 +14,7 @@ const TaskList = () => {
   const [taskInput, setTaskInput] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
-  const pgBtnCount = 6;
+  const pgBtnCount = 5;
 
   const maxItemsToShow = 10;
 
