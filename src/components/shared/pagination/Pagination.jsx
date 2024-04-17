@@ -74,19 +74,19 @@ const Pagination = ({
       <CustomButton
         title="Previous"
         onClick={onPreviousClick}
-        className={`${
+        className={`next-prev-btn ${
           pageNumber === 1 ? "disabled-btn" : "pg-active-btn-color hover-btn"
-        } next-prev-btn`}
+        }`}
       />
       {pageNumbers}
       <CustomButton
         title="Next"
         onClick={onNextClick}
-        className={`${
+        className={`next-prev-btn ${
           pageNumber === pageSize || pageSize === 0
             ? "disabled-btn"
             : "pg-active-btn-color hover-btn"
-        } next-prev-btn`}
+        }`}
       />
     </Box>
   );
