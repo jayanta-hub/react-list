@@ -1,0 +1,18 @@
+.next-prev-btn {
+  @apply rounded-md py-1 px-2 my-1 mx-1 min-w-6;
+}
+.pg-btn {
+  @apply rounded-md py-1 px-2  my-1 mx-1 min-w-6 text-center focus:bg-transparent focus:border focus:border-blue-400 focus:text-blue-500 focus:dark:text-white;
+}
+.pg-active-btn {
+  @apply bg-transparent border border-blue-400 text-blue-500 dark:text-white;
+}
+.pg-active-btn-color {
+  @apply bg-blue-500 text-white;
+}
+.hover-btn:hover {
+  @apply bg-blue-400;
+}
+.span {
+  @apply text-blue-600;
+}

@@ -1,24 +1,19 @@
 import React from "react";
+import { twMerge } from "tailwind-merge";
 const CustomButton = ({
   onClick = () => {},
   title = "",
   className = "",
-  style = {},
-  bg = "",
-  icon = null,
+  ...props
 }) => {
   return (
     <button
-      className={
-        className !== ""
-          ? className
-          : "bg-blue-500 rounded py-1 px-1 text-white min-w-20 hover:bg-blue-400 self-auto"
-      }
-      style={{ ...style, backgroundColor: bg }}
+      {...props}
+      className={twMerge("btn", className)}
       onClick={onClick}
       type="button"
     >
-      {icon ?? title}
+      {title}
     </button>
   );
 };

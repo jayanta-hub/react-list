@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Box, CustomButton, CustomList, Pagination } from "../../index.jsx";
 import { uuid } from "../../../utils/helpers/index.jsx";
-
+import "./taskList.css";
 const TaskList = () => {
   const [tasks, setTasks] = useState(
     Array.from({ length: 100 }, (_, i) => ({
@@ -13,7 +13,7 @@ const TaskList = () => {
   const [taskInput, setTaskInput] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
-  const maxPageNumbersToShow = 5;
+  const pgBtnCount = 6;
 
   const maxItemsToShow = 10;
 
@@ -111,26 +111,26 @@ const TaskList = () => {
   );
 
   const paginationConfig = {
+    pageNumber: currentPage,
+    pageSize: totalPages,
+    pgBtnCount,
     onPreviousClick: handlePrevious,
     onNextClick: handleNext,
-    onPageChange: handlePageChange,
-    currentPage,
-    totalPages,
-    maxPageNumbersToShow,
+    onPageActive: handlePageChange,
   };
 
   const customListConfig = {
+    items: currentItems,
     onDeleteClick: deleteTask,
     onCheckClick: toggleCompleted,
-    currentItems,
   };
   useEffect(() => {
     if (currentItems?.length === 0) handlePrevious();
   }, [currentItems]);
   return (
-    <Box className="max-w-md mx-auto bg-white p-4 shadow-md overflow-hidden md:max-w-2xl rounded-md">
-      <h1 className="font-bold text-justify my-2 text-lg">Task List</h1>
-      <Box className="flex justify-start items-center">
+    <Box className="task-list-container">
+      <h1 className="header-text">Task List</h1>
+      <Box className="task-list-wrapper">
         <input
           type="text"
           placeholder="Add a task"
@@ -138,18 +138,15 @@ const TaskList = () => {
           onChange={(e) => {
             setTaskInput(e.target.value);
           }}
-          className="border border-gray-300 rounded-md mr-2 p-2"
+          className="input-field"
         />
-
         <CustomButton
           title="Add"
           onClick={() => addTask(taskInput)}
           disabled={taskInput === ""}
           className={`${
-            taskInput === ""
-              ? "bg-gray-300 cursor-not-allowed hover:bg-gray-300"
-              : "bg-blue-500"
-          } rounded-md py-1 px-2 text-white my-1 mx-1 min-w-6 hover:bg-blue-400 w-20 h-10`}
+            taskInput === "" ? "disabled-btn" : "bg-blue-500 hover-btn"
+          } add-btn`}
         />
       </Box>
       <CustomList {...customListConfig} />

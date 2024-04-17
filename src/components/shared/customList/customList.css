@@ -1,0 +1,24 @@
+.custom-list-container {
+  @apply max-w-md mx-auto overflow-hidden md:max-w-2xl py-3;
+}
+.ul-wrapper {
+  @apply flex flex-col gap-2;
+}
+.li-wrapper {
+  @apply max-w-md md:max-w-2xl mx-auto 
+  bg-gradient-to-br from-blue-100 to-blue-300 
+  rounded-xl shadow-md overflow-hidden flex justify-between 
+  items-center px-2 py-2 w-full;
+}
+.checkbox-wrapper {
+  @apply flex justify-center items-center flex-wrap;
+}
+.text-wrapper {
+  @apply flex justify-stretch w-full flex-wrap px-2 text-wrap;
+}
+.button-wrapper {
+  @apply flex justify-center items-center flex-wrap min-h-full;
+}
+.d-btn {
+  @apply rounded-md bg-red-500 py-1 px-1 text-white font-sans dark:text-black;
+}

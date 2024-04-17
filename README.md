@@ -28,9 +28,9 @@ import { CustomList } from "../../index.jsx";
 ...
 
 const customListConfig = {
+    items,
     onDeleteClick: deleteTask,
     onCheckClick: toggleCompleted,
-    currentItems,
   };
 ...
 return (
@@ -44,13 +44,13 @@ return (
 
 | Parameter     | Required | Type       | Default  | Description                                       |
 | ------------- | -------- | ---------- | -------- | ------------------------------------------------- |
-| currentItems  | `Yes`    | `Array`    | `[]`     | List of items to display.                         |
+| items         | `Yes`    | `Array`    | `[]`     | List of items to display.                         |
 | onCheckClick  | `Yes`    | `Function` | `()=>{}` | The method to call when checkbox is clicked.      |
 | onDeleteClick | `Yes`    | `Function` | `()=>{}` | The method to call when delete button is clicked. |
 
 # Pagination
 
-**Pagination** is a tiny Javascript library which provides an elegant UI for the end user to use customize pagination. It also features a carefully crafted flow to handle edge cases for volatile user gestures. We provide default UI, but you can always customize the appearance as you like.
+**Pagination** is a tiny Javascript library which provides an elegant UI for the end user to use customize pagination.
 
 ## Basic Usage
 
@@ -60,12 +60,12 @@ import { Pagination } from "../../index.jsx";
 ...
 
  const paginationConfig = {
+    pageNumber=1,
+    pageSize=10,
+    pgBtnCount=5,
     onPreviousClick: ()=>{},
     onNextClick: ()=>{},
-    onPageChange: ()=>{},
-    currentPage=1,
-    pageCount=10,
-    maxPageNumbersToShow=5,
+    onPageActive: ()=>{},
   };
 ...
 return (
@@ -77,15 +77,15 @@ return (
 
 ## Parameters
 
-| Parameter            | Required | Type       | Default  | Description                                                |
-| -------------------- | -------- | ---------- | -------- | ---------------------------------------------------------- |
-| pageCount            | `Yes`    | `Number`   | `0`      | The total number of pages.                                 |
-| currentPage          | `Yes`    | `Number`   | `0`      | This callback is called when user taps outside of a Modal. |
-| maxPageNumbersToShow | `Yes`    | `Number`   | `5`      | The range of pages displayed.                              |
-| onPreviousClick      | `Yes`    | `Function` | `()=>{}` | The method to call when previous button is clicked.        |
-| onNextClick          | `Yes`    | `Function` | `()=>{}` | The method to call when next button is clicked.            |
-| onPageChange         | `Yes`    | `Function` | `()=>{}` | The method to call when a page is clicked.                 |
-|                      |
+| Parameter       | Required | Type       | Default  | Description                                         |
+| --------------- | -------- | ---------- | -------- | --------------------------------------------------- |
+| pageSize        | `Yes`    | `Number`   | `10`     | The total number of item to display.                |
+| pageNumber      | `Yes`    | `Number`   | `1`      | Current page Number.                                |
+| pgBtnCount      | `Yes`    | `Number`   | `5`      | The range of pagination Button.                     |
+| onPreviousClick | `Yes`    | `Function` | `()=>{}` | The method to call when previous button is clicked. |
+| onNextClick     | `Yes`    | `Function` | `()=>{}` | The method to call when next button is clicked.     |
+| onPageActive    | `Yes`    | `Function` | `()=>{}` | The method to call when an active page is clicked.  |
+|                 |
 
 ## Author
 
