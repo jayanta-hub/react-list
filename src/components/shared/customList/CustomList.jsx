@@ -1,15 +1,15 @@
 import React, { memo } from "react";
 import { Box, CustomButton } from "../../index.jsx";
-import { MdDeleteForever } from "react-icons/md";
+import "./customList.css";
 const CustomList = ({
-  currentItems = [],
+  items = [],
   onDeleteClick = () => {},
   onCheckClick = () => {},
 }) => {
   return (
     <Box className="custom-list-container">
       <ul className="ul-wrapper">
-        {currentItems?.map((task, index) => (
+        {items?.map((task, index) => (
           <li key={index} className="li-wrapper">
             <Box className="checkbox-wrapper">
               <input
@@ -26,8 +26,7 @@ const CustomList = ({
               <CustomButton
                 title="Delete"
                 onClick={() => onDeleteClick(task?.id)}
-                className="rounded-md bg-red-500 py-1 px-1 text-white font-sans"
-                // icon={<MdDeleteForever size={20} />}
+                className="d-btn"
               />
             </Box>
           </li>

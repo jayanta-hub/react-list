@@ -1,12 +1,13 @@
 import React, { memo } from "react";
 import { Box, CustomButton } from "../../index.jsx";
+import "./pagination.css";
 const Pagination = ({
   onPreviousClick,
   onNextClick,
-  onPageChange,
-  currentPage = 0,
-  totalPages = 0,
-  maxPageNumbersToShow = 5,
+  onPageActive,
+  pageNumber = 1,
+  pageSize = 10,
+  pgBtnCount = 5,
 }) => {
   const pageNumbers = [];
 
@@ -16,8 +17,8 @@ const Pagination = ({
    */
   const startPage = Math.max(
     Math.min(
-      currentPage - Math.floor(maxPageNumbersToShow / 2),
-      totalPages - maxPageNumbersToShow + 1
+      pageNumber - Math.floor(pgBtnCount / 2),
+      pageSize - pgBtnCount + 1
     ),
     1
   );
@@ -25,7 +26,7 @@ const Pagination = ({
   /*
    * This is calculating the end page number for the pagination component.
    */
-  const endPage = Math.min(startPage + maxPageNumbersToShow - 1, totalPages);
+  const endPage = Math.min(startPage + pgBtnCount - 1, pageSize);
 
   /**
    * The `for` loop in the code snippet is iterating over a range of page numbers starting from
@@ -38,30 +39,31 @@ const Pagination = ({
       <CustomButton
         key={i}
         title={i}
-        className={`rounded-md py-1 px-2  my-1 mx-1 min-w-6 text-center 
-        focus:bg-transparent 
-        focus:border
-         focus:border-blue-400 
-         focus:text-blue-500  ${
-           currentPage === i
-             ? "bg-transparent border border-blue-400 text-blue-500 "
-             : "bg-blue-500 text-white"
-         }`}
-        onClick={() => onPageChange(i)}
+        className={`pg-btn ${
+          pageNumber === i ? "pg-active-btn" : "pg-active-btn-color"
+        }`}
+        onClick={() => onPageActive(i)}
       />
     );
   }
 
-  if (totalPages > maxPageNumbersToShow + 2) {
+  if (pageSize > pgBtnCount + 2) {
     // Add ellipsis for hidden pages in the middle
     if (startPage > 1) {
-      pageNumbers.unshift(<span key="ellipsis-before">...</span>);
+      pageNumbers.unshift(
+        <span key="before" className="span">
+          ...
+        </span>
+      );
     }
-    if (endPage < totalPages) {
-      pageNumbers.push(<span key="ellipsis-after">...</span>);
+    if (endPage < pageSize) {
+      pageNumbers.push(
+        <span key="after" className="span">
+          ...
+        </span>
+      );
     }
   }
-
   /**
    * Renders pagination controls for navigating between pages.
    *
@@ -73,20 +75,18 @@ const Pagination = ({
         title="Previous"
         onClick={onPreviousClick}
         className={`${
-          currentPage === 1
-            ? "bg-gray-300 cursor-not-allowed hover:bg-gray-300"
-            : "bg-blue-500"
-        } rounded-md py-1 px-2 text-white my-1 mx-1 min-w-6 hover:bg-blue-400`}
+          pageNumber === 1 ? "disabled-btn" : "pg-active-btn-color hover-btn"
+        } next-prev-btn`}
       />
       {pageNumbers}
       <CustomButton
         title="Next"
         onClick={onNextClick}
         className={`${
-          currentPage === totalPages || totalPages === 0
-            ? "bg-gray-300 cursor-not-allowed hover:bg-gray-300"
-            : "bg-blue-500"
-        } rounded-md py-1 px-2 text-white my-1 mx-1 min-w-6 hover:bg-blue-400`}
+          pageNumber === pageSize || pageSize === 0
+            ? "disabled-btn"
+            : "pg-active-btn-color hover-btn"
+        } next-prev-btn`}
       />
     </Box>
   );
