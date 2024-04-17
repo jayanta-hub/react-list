@@ -8,7 +8,7 @@
   @apply font-bold text-justify my-2 text-lg dark:text-white;
 }
 .body-text {
-  @apply font-sans text-justify;
+  @apply font-sans text-justify break-all;
 }
 .disabled-btn {
   @apply bg-gray-300 cursor-not-allowed hover:bg-gray-300 text-white;

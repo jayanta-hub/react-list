@@ -1,6 +1,7 @@
 import React, { memo } from "react";
 import { Box, CustomButton } from "../../index.jsx";
 import "./customList.css";
+import { CONTAINS } from "../../../utils/constant.jsx";
 const CustomList = ({
   items = [],
   onDeleteClick = () => {},
@@ -13,7 +14,7 @@ const CustomList = ({
           <li key={index} className="li-wrapper">
             <Box className="checkbox-wrapper">
               <input
-                type="checkbox"
+                type={CONTAINS.CHECKBOX}
                 checked={task?.isCompleted}
                 onChange={() => onCheckClick(task?.id)}
                 className="w-5 h-5"
@@ -24,7 +25,7 @@ const CustomList = ({
             </Box>
             <Box className="button-wrapper">
               <CustomButton
-                title="Delete"
+                title={CONTAINS.DELETE}
                 onClick={() => onDeleteClick(task?.id)}
                 className="d-btn"
               />

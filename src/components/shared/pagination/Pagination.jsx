@@ -1,6 +1,7 @@
 import React, { memo } from "react";
 import { Box, CustomButton } from "../../index.jsx";
 import "./pagination.css";
+import { CONTAINS } from "../../../utils/constant.jsx";
 const Pagination = ({
   onPreviousClick,
   onNextClick,
@@ -72,7 +73,7 @@ const Pagination = ({
   const renderPaginationControls = () => (
     <Box className="flex justify-end items-center w-full">
       <CustomButton
-        title="Previous"
+        title={CONTAINS.PREVIOUS}
         onClick={onPreviousClick}
         className={`next-prev-btn ${
           pageNumber === 1 ? "disabled-btn" : "pg-active-btn-color hover-btn"
@@ -80,7 +81,7 @@ const Pagination = ({
       />
       {pageNumbers}
       <CustomButton
-        title="Next"
+        title={CONTAINS.NEXT}
         onClick={onNextClick}
         className={`next-prev-btn ${
           pageNumber === pageSize || pageSize === 0

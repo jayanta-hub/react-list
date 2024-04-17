@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Box, CustomButton, CustomList, Pagination } from "../../index.jsx";
 import { uuid } from "../../../utils/helpers/index.jsx";
 import "./taskList.css";
+import { CONTAINS } from "../../../utils/constant.jsx";
 const TaskList = () => {
   const [tasks, setTasks] = useState(
     Array.from({ length: 100 }, (_, i) => ({
@@ -129,11 +130,11 @@ const TaskList = () => {
   }, [currentItems]);
   return (
     <Box className="task-list-container">
-      <h1 className="header-text">Task List</h1>
+      <h1 className="header-text">{CONTAINS.TASK_LIST}</h1>
       <Box className="task-list-wrapper">
         <input
-          type="text"
-          placeholder="Add a task"
+          type={CONTAINS.TEXT}
+          placeholder={CONTAINS.ADD_TASK}
           value={taskInput}
           onChange={(e) => {
             setTaskInput(e.target.value);
@@ -141,7 +142,7 @@ const TaskList = () => {
           className="input-field"
         />
         <CustomButton
-          title="Add"
+          title={CONTAINS.ADD}
           onClick={() => addTask(taskInput)}
           disabled={taskInput === ""}
           className={`${

@@ -14,7 +14,7 @@
   @apply flex justify-center items-center flex-wrap;
 }
 .text-wrapper {
-  @apply flex justify-stretch w-full flex-wrap px-2 text-wrap;
+  @apply flex justify-stretch w-full flex-wrap px-2;
 }
 .button-wrapper {
   @apply flex justify-center items-center flex-wrap min-h-full;
