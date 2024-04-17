@@ -23,13 +23,11 @@ const Pagination = ({
     ),
     1
   );
-  console.log("🚀 ~ startPage:", startPage);
 
   /*
    * This is calculating the end page number for the pagination component.
    */
   const endPage = Math.min(startPage + pgBtnCount - 1, pageSize);
-  console.log("🚀 ~ endPage:", endPage);
 
   /**
    * The `for` loop in the code snippet is iterating over a range of page numbers starting from
@@ -72,49 +70,51 @@ const Pagination = ({
   /**
    * Renders pagination controls for navigating between pages.
    *
-   * @return {JSX.Element} The pagination controls JSX element.
+   * @return {JSX.Element|null} The pagination controls JSX element or null.
    */
-  const renderPaginationControls = () => (
-    <Box className="flex justify-end items-center w-full">
-      <CustomButton
-        title={CONTAINS.PREVIOUS}
-        onClick={onPreviousClick}
-        className={`next-prev-btn ${
-          pageNumber === 1 ? "disabled-btn" : "pg-active-btn-color hover-btn"
-        }`}
-      />
-      {endPage > 0 && (
-        <CustomButton
-          title={1}
-          className={`pg-btn ${
-            pageNumber === 1 ? "pg-active-btn" : "pg-active-btn-color"
-          }`}
-          onClick={() => onPageActive(1)}
-        />
-      )}
-      {pageNumbers}
-      {endPage !== 1 && endPage > 0 && (
-        <CustomButton
-          title={pageSize}
-          className={`pg-btn ${
-            pageNumber === pageSize ? "pg-active-btn" : "pg-active-btn-color"
-          }`}
-          onClick={() => onPageActive(pageSize)}
-        />
-      )}
+  const renderPaginationControls = () => {
+    const prevBtnClassName =
+      pageNumber === 1 ? "disabled-btn" : "pg-active-btn-color hover-btn";
 
-      <CustomButton
-        title={CONTAINS.NEXT}
-        onClick={onNextClick}
-        className={`next-prev-btn ${
-          pageNumber === pageSize || pageSize === 0
-            ? "disabled-btn"
-            : "pg-active-btn-color hover-btn"
-        }`}
-      />
-    </Box>
-  );
-  console.log("🚀 ~ pageNumbers:", pageNumbers);
+    const nextBtnClassName =
+      pageNumber === pageSize || pageSize === 0
+        ? "disabled-btn"
+        : "pg-active-btn-color hover-btn";
+
+    return (
+      <Box className="flex justify-end items-center w-full">
+        <CustomButton
+          title={CONTAINS.PREVIOUS}
+          onClick={onPreviousClick}
+          className={`next-prev-btn ${prevBtnClassName}`}
+        />
+        {endPage > 0 && (
+          <CustomButton
+            title={1}
+            className={`pg-btn ${
+              pageNumber === 1 ? "pg-active-btn" : "pg-active-btn-color"
+            }`}
+            onClick={() => onPageActive(1)}
+          />
+        )}
+        {pageNumbers}
+        {endPage !== 1 && endPage > 0 && (
+          <CustomButton
+            title={pageSize}
+            className={`pg-btn ${
+              pageNumber === pageSize ? "pg-active-btn" : "pg-active-btn-color"
+            }`}
+            onClick={() => onPageActive(pageSize)}
+          />
+        )}
+        <CustomButton
+          title={CONTAINS.NEXT}
+          onClick={onNextClick}
+          className={`next-prev-btn ${nextBtnClassName}`}
+        />
+      </Box>
+    );
+  };
 
   return <>{renderPaginationControls()}</>;
 };
