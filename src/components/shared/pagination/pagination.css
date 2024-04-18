@@ -19,3 +19,40 @@
 .pg-wrapper {
   @apply flex justify-end items-center w-full flex-wrap;
 }
+
+.pagination-container {
+  @apply flex space-x-4 list-none justify-end;
+}
+
+.pagination-item {
+  @apply px-4 py-2 text-center cursor-pointer rounded-full hover:bg-blue-100 focus:outline-none focus:ring focus:ring-offset-gray-200 active:bg-gray-200;
+  /* 
+  &:hover:not(.disabled) {
+    @apply bg-gray-100;
+  }
+
+  &.selected {
+    @apply bg-gray-200;
+  } */
+
+  &.disabled {
+    @apply cursor-default opacity-50 pointer-events-none;
+  }
+}
+
+.arrow::before {
+  content: "";
+  display: inline-block;
+  width: 0.4em;
+  height: 0.4em;
+  border-right: 0.12em solid rgba(0, 0, 0, 0.87);
+  border-top: 0.12em solid rgba(0, 0, 0, 0.87);
+}
+
+.left {
+  transform: rotate(-135deg) translate(-50%);
+}
+
+.right {
+  transform: rotate(45deg);
+}

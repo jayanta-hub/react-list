@@ -112,12 +112,10 @@ const TaskList = () => {
   );
 
   const paginationConfig = {
-    pageNumber: currentPage,
-    pageSize: totalPages,
-    pgBtnCount,
-    onPreviousClick: handlePrevious,
-    onNextClick: handleNext,
-    onPageActive: handlePageChange,
+    currentPage,
+    pageSize: 10,
+    totalCount: tasks?.length,
+    onPageChange: handlePageChange,
   };
 
   const customListConfig = {
