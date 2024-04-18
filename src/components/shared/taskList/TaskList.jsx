@@ -13,7 +13,7 @@ const TaskList = () => {
   );
   const [taskInput, setTaskInput] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  let pageSize = 20;
+  let pageSize = 10;
   const siblingCount = 2;
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * pageSize;
