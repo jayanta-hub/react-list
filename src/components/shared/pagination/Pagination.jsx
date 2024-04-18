@@ -57,7 +57,10 @@ const Pagination = ({
         </span>
       );
     }
-    if (endPage < pageSize) {
+    if (
+      endPage < pageSize &&
+      pageNumbers[pageNumbers.length - 1].props.title !== pageSize - 1
+    ) {
       pageNumbers.push(
         <span key="after" className="span">
           ...
