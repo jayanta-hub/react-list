@@ -1,5 +1,5 @@
 .custom-list-container {
-  @apply max-w-md mx-auto overflow-hidden md:max-w-2xl h-[70vh] overflow-y-auto;
+  @apply max-w-md mx-auto overflow-hidden md:max-w-2xl max-h-[70vh] overflow-y-auto;
 }
 .ul-wrapper {
   @apply flex flex-col gap-2;
