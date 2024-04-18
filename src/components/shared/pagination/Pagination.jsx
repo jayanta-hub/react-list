@@ -23,12 +23,10 @@ const Pagination = ({
     ),
     1
   );
-
   /*
    * This is calculating the end page number for the pagination component.
    */
   const endPage = Math.min(startPage + pgBtnCount - 1, pageSize);
-
   /**
    * The `for` loop in the code snippet is iterating over a range of page numbers starting from
    * `startPage` to `endPage`. For each page number within this range, a `CustomButton` component is
@@ -82,7 +80,7 @@ const Pagination = ({
         : "pg-active-btn-color hover-btn";
 
     return (
-      <Box className="flex justify-end items-center w-full">
+      <Box className="pg-wrapper">
         <CustomButton
           title={CONTAINS.PREVIOUS}
           onClick={onPreviousClick}
