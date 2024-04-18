@@ -123,6 +123,9 @@ import React from "react";
 import classnames from "classnames";
 import { usePagination, DOTS } from "../../../utils/hooks/usePagination";
 import "./pagination.css";
+import { Box, CustomButton } from "../../index.jsx";
+import { CONTAINS } from "../../../utils/constant.jsx";
+
 const Pagination = (props) => {
   const {
     onPageChange,
@@ -139,7 +142,7 @@ const Pagination = (props) => {
     siblingCount,
     pageSize,
   });
-  console.log("🚀 ~ Pagination ~ paginationRange:", paginationRange.length);
+  console.log("🚀 ~ Pagination ~ paginationRange:", paginationRange);
 
   if (currentPage === 0 || paginationRange.length < 2) {
     return null;
@@ -155,6 +158,12 @@ const Pagination = (props) => {
   };
 
   let lastPage = paginationRange[paginationRange.length - 1];
+  const prevBtnClassName =
+    currentPage === 1 ? "disabled-btn" : "pg-active-btn-color hover-btn";
+
+  const nextBtnClassName =
+    currentPage === lastPage ? "disabled-btn" : "pg-active-btn-color hover-btn";
+
   return (
     <ul className="pagination-container">
       <li
@@ -165,9 +174,14 @@ const Pagination = (props) => {
       >
         <div className="arrow left" />
       </li>
+      {/* <CustomButton
+        title={CONTAINS.PREVIOUS}
+        onClick={onPrevious}
+        className={`next-prev-btn ${prevBtnClassName}`}
+      /> */}
       {paginationRange.map((pageNumber) => {
         if (pageNumber === DOTS) {
-          return <li className="pagination-item dots">&#8230;</li>;
+          return <li className="dots">&#8230;</li>;
         }
 
         return (
@@ -189,6 +203,11 @@ const Pagination = (props) => {
       >
         <div className="arrow right" />
       </li>
+      {/* <CustomButton
+        title={CONTAINS.NEXT}
+        onClick={onNext}
+        className={`next-prev-btn ${nextBtnClassName}`}
+      /> */}
     </ul>
   );
 };

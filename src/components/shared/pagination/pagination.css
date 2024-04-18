@@ -25,19 +25,25 @@
 }
 
 .pagination-item {
-  @apply px-4 py-2 text-center cursor-pointer rounded-full hover:bg-blue-100 focus:outline-none focus:ring focus:ring-offset-gray-200 active:bg-gray-200;
+  @apply px-4 py-2 text-center cursor-pointer rounded-full;
   /* 
+  &.dots {
+    @apply bg-transparent cursor-default px-4 py-2;
+  } */
   &:hover:not(.disabled) {
     @apply bg-gray-100;
   }
 
   &.selected {
     @apply bg-gray-200;
-  } */
+  }
 
   &.disabled {
     @apply cursor-default opacity-50 pointer-events-none;
   }
+}
+.dots {
+  @apply bg-transparent cursor-default px-4 py-2;
 }
 
 .arrow::before {
@@ -48,7 +54,9 @@
   border-right: 0.12em solid rgba(0, 0, 0, 0.87);
   border-top: 0.12em solid rgba(0, 0, 0, 0.87);
 }
-
+/* .arrow::before {
+  @apply content-[''] inline-block w-2 h-2 border border-r-gray-700 border-t-gray-700;
+} */
 .left {
   transform: rotate(-135deg) translate(-50%);
 }
