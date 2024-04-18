@@ -68,7 +68,7 @@ const TaskList = () => {
    */
   const addTask = useCallback(
     (text) => {
-      if (taskInput !== "")
+      if (taskInput !== "" && taskInput !== " ")
         setTasks((prev) => [{ id: uuid(), text, isCompleted: false }, ...prev]);
       setTaskInput("");
       if (currentPage > 1) {
@@ -137,7 +137,7 @@ const TaskList = () => {
           placeholder={CONTAINS.ADD_TASK}
           value={taskInput}
           onChange={(e) => {
-            setTaskInput(e.target.value);
+            setTaskInput(e.target.value.trim());
           }}
           className="input-field"
         />
