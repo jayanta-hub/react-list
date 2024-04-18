@@ -19,3 +19,6 @@
 .pg-wrapper {
   @apply flex justify-end items-center w-full flex-wrap;
 }
+.dots {
+  @apply my-1 mx-1 py-1 px-1 min-w-6;
+}

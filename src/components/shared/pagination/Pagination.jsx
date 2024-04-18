@@ -2,122 +2,72 @@ import React, { memo } from "react";
 import { Box, CustomButton } from "../../index.jsx";
 import "./pagination.css";
 import { CONTAINS } from "../../../utils/constant.jsx";
+import { DOTS, usePagination } from "../../../utils/hooks/usePagination.js";
 const Pagination = ({
-  onPreviousClick,
-  onNextClick,
   onPageActive,
   pageNumber = 1,
   pageSize = 10,
-  pgBtnCount = 5,
+  siblingCount = 5,
+  totalCount,
 }) => {
-  const pageNumbers = [];
+  const paginationRange = usePagination({
+    totalCount,
+    siblingCount,
+    pageSize,
+    currentPage: pageNumber,
+  });
 
-  /*
-   * This is calculating the starting page number for the pagination component based on the current
-   * page, total number of pages, and the maximum number of page numbers to show.
-   */
-  const startPage = Math.max(
-    Math.min(
-      pageNumber - Math.floor(pgBtnCount / 2),
-      pageSize - pgBtnCount + 1
-    ),
-    1
-  );
-  /*
-   * This is calculating the end page number for the pagination component.
-   */
-  const endPage = Math.min(startPage + pgBtnCount - 1, pageSize);
-  /**
-   * The `for` loop in the code snippet is iterating over a range of page numbers starting from
-   * `startPage` to `endPage`. For each page number within this range, a `CustomButton` component is
-   * created and added to the `pageNumbers` array.
-   */
-
-  for (let i = startPage; i <= endPage; i++) {
-    if (i !== 1 && i !== pageSize) {
-      pageNumbers.push(
-        <CustomButton
-          key={i}
-          title={i}
-          className={`pg-btn ${
-            pageNumber === i ? "pg-active-btn" : "pg-active-btn-color"
-          }`}
-          onClick={() => onPageActive(i)}
-        />
-      );
-    }
+  if (totalCount === 0 || paginationRange.length < 1) {
+    return null;
   }
+  const onNext = () => {
+    onPageActive(pageNumber + 1);
+  };
 
-  if (pageSize > pgBtnCount + 2) {
-    // Add ellipsis for hidden pages in the middle
-    if (startPage > 1 && pageNumbers[0].props.title !== 2) {
-      pageNumbers.unshift(
-        <span key="before" className="span">
-          ...
-        </span>
-      );
-    }
-    if (
-      endPage < pageSize &&
-      pageNumbers[pageNumbers.length - 1].props.title !== pageSize - 1
-    ) {
-      pageNumbers.push(
-        <span key="after" className="span">
-          ...
-        </span>
-      );
-    }
-  }
-  /**
-   * Renders pagination controls for navigating between pages.
-   *
-   * @return {JSX.Element|null} The pagination controls JSX element or null.
-   */
-  const renderPaginationControls = () => {
-    const prevBtnClassName =
-      pageNumber === 1 ? "disabled-btn" : "pg-active-btn-color hover-btn";
+  const onPrevious = () => {
+    onPageActive(pageNumber - 1);
+  };
+  let lastPage = paginationRange[paginationRange.length - 1];
+  const prevBtnClassName =
+    pageNumber === 1 ? "disabled-btn" : "pg-active-btn-color hover-btn";
 
-    const nextBtnClassName =
-      pageNumber === pageSize || pageSize === 0
-        ? "disabled-btn"
-        : "pg-active-btn-color hover-btn";
+  const nextBtnClassName =
+    pageNumber === lastPage ? "disabled-btn" : "pg-active-btn-color hover-btn";
 
-    return (
+  return (
+    <>
       <Box className="pg-wrapper">
         <CustomButton
           title={CONTAINS.PREVIOUS}
-          onClick={onPreviousClick}
+          onClick={onPrevious}
+          disabled={pageNumber === 1 || pageNumber === 0}
           className={`next-prev-btn ${prevBtnClassName}`}
         />
-        {endPage > 0 && (
-          <CustomButton
-            title={1}
-            className={`pg-btn ${
-              pageNumber === 1 ? "pg-active-btn" : "pg-active-btn-color"
-            }`}
-            onClick={() => onPageActive(1)}
-          />
-        )}
-        {pageNumbers}
-        {endPage !== 1 && endPage > 0 && (
-          <CustomButton
-            title={pageSize}
-            className={`pg-btn ${
-              pageNumber === pageSize ? "pg-active-btn" : "pg-active-btn-color"
-            }`}
-            onClick={() => onPageActive(pageSize)}
-          />
-        )}
+
+        {paginationRange.map((item) => {
+          if (item === DOTS) {
+            return <Box className="dots ">&#8230;</Box>;
+          }
+          return (
+            <CustomButton
+              key={item}
+              title={item}
+              onClick={() => onPageActive(item)}
+              className={`pg-btn ${
+                item === pageNumber ? "pg-active-btn" : "pg-active-btn-color"
+              }`}
+            />
+          );
+        })}
         <CustomButton
           title={CONTAINS.NEXT}
-          onClick={onNextClick}
+          onClick={onNext}
+          disabled={pageNumber === lastPage}
           className={`next-prev-btn ${nextBtnClassName}`}
         />
       </Box>
-    );
-  };
-
-  return <>{renderPaginationControls()}</>;
+    </>
+  );
 };
 
 export default memo(Pagination);

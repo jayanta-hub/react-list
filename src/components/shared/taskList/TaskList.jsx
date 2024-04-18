@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { Box, CustomButton, CustomList, Pagination } from "../../index.jsx";
 import { uuid } from "../../../utils/helpers/index.jsx";
 import "./taskList.css";
 import { CONTAINS } from "../../../utils/constant.jsx";
 const TaskList = () => {
   const [tasks, setTasks] = useState(
-    Array.from({ length: 100 }, (_, i) => ({
+    Array.from({ length: 50 }, (_, i) => ({
       id: uuid(),
       text: `Item ${i + 1}`,
       isCompleted: false,
@@ -14,39 +14,12 @@ const TaskList = () => {
   const [taskInput, setTaskInput] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
-  const pgBtnCount = 5;
-
-  const maxItemsToShow = 10;
-
-  const totalPages = Math.ceil(tasks?.length / maxItemsToShow);
-
-  const startIndex = (currentPage - 1) * maxItemsToShow;
-
-  const endIndex = Math.min(startIndex + maxItemsToShow, tasks?.length);
-
-  const currentItems = tasks?.slice(startIndex, endIndex);
-
-  /**
-   * Decrements the current page by 1 if the current page is greater than 1.
-   *
-   * @return {void}
-   */
-  const handlePrevious = useCallback(() => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  }, [currentPage]);
-
-  /**
-   * Increments the current page if it's not the last page.
-   *
-   * @return {void} No return value
-   */
-  const handleNext = useCallback(() => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
-  }, [currentPage]);
+  const siblingCount = 2;
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * 10;
+    const lastPageIndex = firstPageIndex + 10;
+    return tasks.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, tasks]);
 
   /**
    * A function that handles a change in the current page.
@@ -113,21 +86,17 @@ const TaskList = () => {
 
   const paginationConfig = {
     pageNumber: currentPage,
-    pageSize: totalPages,
-    pgBtnCount,
-    onPreviousClick: handlePrevious,
-    onNextClick: handleNext,
+    pageSize: 10,
+    siblingCount,
+    totalCount: tasks?.length,
     onPageActive: handlePageChange,
   };
 
   const customListConfig = {
-    items: currentItems,
+    items: currentTableData,
     onDeleteClick: deleteTask,
     onCheckClick: toggleCompleted,
   };
-  useEffect(() => {
-    if (currentItems?.length === 0) handlePrevious();
-  }, [currentItems]);
   return (
     <Box className="task-list-container">
       <h1 className="header-text">{CONTAINS.TASK_LIST}</h1>
