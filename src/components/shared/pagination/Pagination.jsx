@@ -52,7 +52,7 @@ const Pagination = ({
 
   if (pageSize > pgBtnCount + 2) {
     // Add ellipsis for hidden pages in the middle
-    if (startPage > 1) {
+    if (startPage > 1 && pageNumbers[0].props.title !== 2) {
       pageNumbers.unshift(
         <span key="before" className="span">
           ...
