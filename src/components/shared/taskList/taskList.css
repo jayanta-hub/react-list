@@ -1,9 +1,6 @@
 .task-list-container {
   @apply max-w-md mx-auto bg-white dark:bg-black p-4 shadow-md overflow-hidden md:max-w-2xl rounded-md;
 }
-.task-list-wrapper {
-  @apply flex justify-start items-center;
-}
 .input-field {
   @apply border border-gray-300 rounded-md mr-2 p-2;
 }

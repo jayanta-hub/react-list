@@ -13,11 +13,11 @@ const TaskList = () => {
   );
   const [taskInput, setTaskInput] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-
+  let pageSize = 20;
   const siblingCount = 2;
   const currentTableData = useMemo(() => {
-    const firstPageIndex = (currentPage - 1) * 10;
-    const lastPageIndex = firstPageIndex + 10;
+    const firstPageIndex = (currentPage - 1) * pageSize;
+    const lastPageIndex = firstPageIndex + pageSize;
     return tasks.slice(firstPageIndex, lastPageIndex);
   }, [currentPage, tasks]);
 
@@ -86,7 +86,7 @@ const TaskList = () => {
 
   const paginationConfig = {
     pageNumber: currentPage,
-    pageSize: 10,
+    pageSize,
     siblingCount,
     totalCount: tasks?.length,
     onPageActive: handlePageChange,

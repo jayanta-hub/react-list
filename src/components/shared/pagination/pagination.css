@@ -13,9 +13,6 @@
 .hover-btn:hover {
   @apply bg-blue-400;
 }
-.span {
-  @apply text-blue-600;
-}
 .pg-wrapper {
   @apply flex justify-end items-center w-full flex-wrap;
 }

@@ -6,6 +6,7 @@ const CustomList = ({
   items = [],
   onDeleteClick = () => {},
   onCheckClick = () => {},
+  className,
 }) => {
   return (
     <Box className="custom-list-container">
