@@ -136,7 +136,7 @@ const TaskList = () => {
           placeholder="Add a task"
           value={taskInput}
           onChange={(e) => {
-            setTaskInput(e.target.value);
+            setTaskInput(e.target.value.replace(/\s/g,""));
           }}
           className="input-field"
         />
