@@ -4,7 +4,7 @@ import { uuid } from "../../../utils/helpers/index.jsx";
 import "./taskList.css";
 const TaskList = () => {
   const [tasks, setTasks] = useState(
-    Array.from({ length: 100 }, (_, i) => ({
+    Array.from({ length: 90 }, (_, i) => ({
       id: uuid(),
       text: `Item ${i + 1}`,
       isCompleted: false,
@@ -136,7 +136,7 @@ const TaskList = () => {
           placeholder="Add a task"
           value={taskInput}
           onChange={(e) => {
-            setTaskInput(e.target.value.replace(/\s/g,""));
+            setTaskInput(e.target.value.replace(/\s/g, ""));
           }}
           className="input-field"
         />
