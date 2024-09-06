@@ -4,7 +4,7 @@ import { uuid } from "../../../utils/helpers/index.jsx";
 import "./taskList.css";
 const TaskList = () => {
   const [tasks, setTasks] = useState(
-    Array.from({ length: 90 }, (_, i) => ({
+    Array.from({ length: 100 }, (_, i) => ({
       id: uuid(),
       text: `Item ${i + 1}`,
       isCompleted: false,

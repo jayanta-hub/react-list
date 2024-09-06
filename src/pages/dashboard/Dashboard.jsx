@@ -37,7 +37,7 @@ const Dashboard = () => {
   }
   return (
     <Box className="container items-center py-5">
-      {JSON.stringify(apiData)}
+      {/* {JSON.stringify(apiData)} */}
       <TaskList />
     </Box>
   );
